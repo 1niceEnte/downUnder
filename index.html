@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Louis - Down Under</title>
+    <link rel="stylesheet" href="paper.min.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+
+        }
+
+        /* main vertical center */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main .card {
+            cursor: pointer;
+        }
+
+        h4 {
+            /* no linebreaks */
+            white-space: nowrap;
+        }
+
+        #player {
+            position: absolute;
+            transition: all 1s ease-in-out;
+            background-color: white;
+            display: none;
+        }
+
+        body {
+            background-size: 675px 144px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 675 144" width="675" height="144" style="opacity: 0.5; filter: grayscale(0.5);"><text x="0em" y="1em" font-size="60" transform="rotate(0 37.5 36)">☠️</text><text x="1.25em" y="2em" font-size="60" transform="rotate(0 112.5 96)">💀</text><text x="2.5em" y="1em" font-size="60" transform="rotate(0 187.5 36)">🐍</text><text x="3.75em" y="2em" font-size="60" transform="rotate(0 262.5 96)">🦈</text><text x="5em" y="1em" font-size="60" transform="rotate(0 337.5 36)">🦂</text><text x="6.25em" y="2em" font-size="60" transform="rotate(0 412.5 96)">🐨</text><text x="7.5em" y="1em" font-size="60" transform="rotate(0 487.5 36)">🐝</text><text x="8.75em" y="2em" font-size="60" transform="rotate(0 562.5 96)">✈️</text><text x="10em" y="1em" font-size="60" transform="rotate(0 637.5 36)">🏄</text></svg>');
+        }
+
+        .card .card-body {
+            padding: 0 1em;
+        }
+
+        .card.correct {
+            border: 2px solid green;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h1 img:hover {
+            animation: spin 1s infinite linear;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate3d(0, 1, 0, 0deg);
+            }
+
+            100% {
+                transform: rotate3d(0, 1, 0, 360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 675 144" width="675" height="144"
+        style="opacity: 0.5; filter: grayscale(0.5);"><text x="0em" y="1em" font-size="60"
+            transform="rotate(0 37.5 36)">☠️</text><text x="1.25em" y="2em" font-size="60"
+            transform="rotate(0 112.5 96)">💀</text><text x="2.5em" y="1em" font-size="60"
+            transform="rotate(0 187.5 36)">🐍</text><text x="3.75em" y="2em" font-size="60"
+            transform="rotate(0 262.5 96)">🦈</text><text x="5em" y="1em" font-size="60"
+            transform="rotate(0 337.5 36)">🦂</text><text x="6.25em" y="2em" font-size="60"
+            transform="rotate(0 412.5 96)">🐨</text><text x="7.5em" y="1em" font-size="60"
+            transform="rotate(0 487.5 36)">🐝</text><text x="8.75em" y="2em" font-size="60"
+            transform="rotate(0 562.5 96)">✈️</text><text x="10em" y="1em" font-size="60"
+            transform="rotate(0 637.5 36)">🏄</text></svg>
+
+    <audio src="audio/bg.mp3" autoplay loop id="bgMusic">
+
+    </audio>
+
+    <main class="paper container container-lg">
+
+        <h1><img src="img/louis.png" class="no-border" style="height: 200px;float:left;" onclick="bgMusic.play()">
+            Menü - Louis Down Under
+            <img onclick="bgMusic.play()" src="img/louis.png" class="no-border"
+                style="height: 200px;float:right;transform: rotate3d(0, 1, 0, 180deg);">
+        </h1>
+
+        <div class="row">
+            <div class="col-4 col">
+                <div class="card" id="aufwachen">
+                    <div class="card-body">
+                        <h4 class="card-title">Tiere</h4>
+                    </div>
+                    <img class="image-bottom" src="img/outdoor.jpeg">
+                </div>
+            </div>
+            <div class="col-4 col">
+                <div class="card" id="indoor">
+                    <div class="card-body">
+                        <h4 class="card-title">Indoor</h4>
+                    </div>
+                    <img class="image-bottom" src="img/indoor.jpeg">
+                </div>
+            </div>
+            <div class="col-4 col">
+                <div class="card" id="outdoor">
+                    <div class="card-body">
+                        <h4 class="card-title">Outdoor</h4>
+                    </div>
+                    <img class="image-bottom" src="img/aufwachen.jpg">
+                </div>
+            </div>
+            <div class="col-2 col"></div>
+            <div class="col-4 col">
+                <div class="card" id="beach">
+                    <div class="card-body">
+                        <h4 class="card-title">Strand</h4>
+                    </div>
+                    <img class="image-bottom" src="img/beach.jpeg">
+                </div>
+            </div>
+            <div class="col-4 col">
+                <div class="card" id="people">
+                    <div class="card-body">
+                        <h4 class="card-title">Menschen</h4>
+                    </div>
+                    <img class="image-bottom" src="img/people.jpeg">
+                </div>
+            </div>
+            <div class="col-2 col"></div>
+        </div>
+    </main>
+
+    <div id="player">
+        <div class="card">
+            <video class="image-bottom" src="" controls></video>
+            <!-- 4 Options -->
+            <div class="row" id="playerOptions">
+                <div class="col-6 col">
+                    <button class="btn-block">Option 1</button>
+                </div>
+                <div class="col-6 col">
+                    <button class="btn-block">Option 2</button>
+                </div>
+                <div class="col-6 col">
+                    <button class="btn-block">Option 3</button>
+                </div>
+                <div class="col-6 col">
+                    <button class="btn-block" data-correct="true">Option 4</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const config = {
+            aufwachen: {
+                video: 'clips/MM_Intro.webm',
+                options: [{
+                    video: 'clips/MM_D_Karten.webm',
+                    text: 'Karten',
+                    correct: false,
+                }, {
+                    video: 'clips/MM_D_Selfie.webm',
+                    text: 'Selfie',
+                    correct: false
+                }, {
+                    video: 'clips/MM_D_Trauben.webm',
+                    text: 'Trauben',
+                    correct: false
+                }, {
+                    video: 'clips/MM_L_Umarmen.webm',
+                    text: 'Umarmen',
+                    correct: true
+                }]
+            },
+            indoor: {
+                video: 'clips/T_Intro.webm',
+                options: [{
+                    video: 'clips/T_D_Busch.webm',
+                    text: 'Busch',
+                    correct: false,
+                }, {
+                    video: 'clips/T_D_Einpiss.webm',
+                    text: 'Nichts tun',
+                    correct: false
+                }, {
+                    video: 'clips/T_D_Spinne.webm',
+                    text: 'Auf klo gehen',
+                    correct: false
+                }, {
+                    video: 'clips/T_L_Insektenspray.webm',
+                    text: 'Insektenspray',
+                    correct: true
+                }]
+            },
+            outdoor: {
+                video: 'clips/S_Intro.webm',
+                options: [{
+                    video: 'clips/S_D_Ruf.webm',
+                    text: 'Lockruf',
+                    correct: false,
+                }, {
+                    video: 'clips/S_D_Schießen.webm',
+                    text: 'Erschießen',
+                    correct: false
+                }, {
+                    video: 'clips/S_D_Tanz.webm',
+                    text: 'Paarungstanz',
+                    correct: false
+                }, {
+                    video: 'clips/S_L_Rennen.webm',
+                    text: 'Rennen',
+                    correct: true
+                }]
+            },
+            beach: {
+                video: 'clips/L_Intro.webm',
+                options: [{
+                    video: 'clips/L_D_Hut.webm',
+                    text: 'Hut',
+                    correct: false,
+                }, {
+                    video: 'clips/L_D_Schaufel.webm',
+                    text: 'Schaufel',
+                    correct: false
+                }, {
+                    video: 'clips/L_D_Sonnencreme.webm',
+                    text: 'Sonnencreme',
+                    correct: false
+                }, {
+                    video: 'clips/L_L_Helm.webm',
+                    text: 'Helm',
+                    correct: true
+                }]
+            },
+            people: {
+                video: 'clips/FL_Intro.webm',
+                options: [{
+                    video: 'clips/FL_D_Grüße.webm',
+                    text: 'Grüßen',
+                    correct: false,
+                }, {
+                    video: 'clips/FL_D_Mittelfinger.webm',
+                    text: 'Mittelfinger',
+                    correct: false
+                }, {
+                    video: 'clips/FL_D_Prügel.webm',
+                    text: 'Schlägerei',
+                    correct: false
+                }, {
+                    video: 'clips/FL_L_Heirat.webm',
+                    text: 'Heiraten',
+                    correct: true
+                }]
+            }
+        }
+
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.volume = 0.2
+        bgMusic.play()
+
+        const cards = document.querySelectorAll('main .card');
+        cards.forEach(card => {
+            const player = document.getElementById('player');
+            card.addEventListener('click', () => {
+                bgMusic.play()
+                player.style.display = 'block';
+                setTimeout(() => {
+                    // View transition
+                    // Set player to position of card
+                    player.style.top = card.offsetTop - card.offsetHeight / 4 + 'px';
+                    player.style.left = card.offsetLeft + card.offsetWidth / 2 + 'px';
+                    // Set player to size of card
+                    player.style.width = card.offsetWidth + 'px';
+                    player.style.height = card.offsetHeight + 'px';
+                    // Set player to visible
+                    player.style.display = 'block';
+
+                    // Animate to fullscreen
+                    player.style.top = 0;
+                    player.style.left = 0;
+                    player.style.width = '100vw';
+                    player.style.height = '100vh';
+                    player.style.padding = '5%';
+
+                    // Get entry from config
+                    const entry = config[card.id];
+
+                    // Set poster image
+                    player.querySelector('video').poster = card.querySelector('img').src + '.png'
+                    player.querySelector('video').src = entry.video;
+
+                    player.querySelector('#playerOptions').style.display = 'none';
+
+                    player.querySelector('video').onplay = () => {
+                        // Play bg music
+                        bgMusic.pause();
+                    }
+                    // Onend
+                    player.querySelector('video').onended = () => {
+                        bgMusic.play();
+
+                        // Set options
+                        player.querySelector('#playerOptions').innerHTML = '';
+                        const options = config[card.id];
+
+                        // Shuffle options
+                        options.options.sort(() => Math.random() - 0.5);
+
+                        options.options.forEach(option => {
+                            const div = document.createElement('div');
+                            div.classList.add('col-6', 'col');
+
+                            const button = document.createElement('button');
+                            button.classList.add('btn-block');
+                            button.innerText = option.text;
+                            if (option.correct) {
+                                button.setAttribute('data-correct', true);
+                            }
+                            if (option.revealed) {
+                                button.classList.add(option.correct ? 'btn-success' : 'btn-danger');
+                            }
+
+                            div.appendChild(button);
+                            player.querySelector('#playerOptions').appendChild(div);
+                        });
+
+                        // Show 4 options
+                        player.querySelector('#playerOptions').style.display = 'flex';
+
+                        // Scroll to options
+                        player.querySelector('#playerOptions').scrollIntoView({
+                            behavior: 'smooth'
+                        });
+
+                        // Options play video
+                        player.querySelectorAll('#playerOptions button').forEach((button, index) => {
+                            button.addEventListener('click', () => {
+
+                                // Get option
+                                const option = options.options[index];
+
+                                // Hide options
+                                player.querySelector('#playerOptions').style.display = 'none';
+
+                                // Play video
+                                player.querySelector('video').src = option.video;
+                                player.querySelector('video').play();
+
+                                // Set config value to revealed
+                                config[card.id].options[index].revealed = true;
+
+                                if (button.hasAttribute('data-correct')) {
+
+                                    // Add correct class to card
+                                    card.classList.add('correct');
+
+                                    // Play correct.mp3
+                                    const correct = new Audio('audio/correct.mp3');
+                                    correct.play();
+
+                                    // Correct
+                                    console.log('correct');
+                                    // Video onend closes player
+                                    player.querySelector('video').onended = () => {
+                                        // Animates back to card
+                                        player.style.top = card.offsetTop - card.offsetHeight / 4 + 'px';
+                                        player.style.left = card.offsetLeft + card.offsetWidth / 2 + 'px';
+                                        player.style.width = card.offsetWidth + 'px';
+                                        player.style.height = card.offsetHeight + 'px';
+                                        player.style.padding = '0';
+                                        // Hide player
+                                        setTimeout(() => {
+                                            player.style.display = 'none';
+
+                                            bgMusic.play();
+                                        }, 1000);
+                                    }
+                                } else {
+                                    // Incorrect
+                                    console.log('incorrect');
+
+                                    // Play wrong.mp3
+                                    const wrong = new Audio('audio/wrong.mp3');
+                                    //wrong.play();
+                                }
+                            });
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
